@@ -27,7 +27,6 @@ const CreateForm = ({ toggleModal, formType }: CreateFormProp) => {
     const onSubmit: SubmitHandler<FieldValues> = (data: any) => {
         axios.post(`/api/${formType}`, data)
         .then(res => {
-          console.log(res)
           startTransition(() => {
             router.refresh()
           })

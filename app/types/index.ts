@@ -1,10 +1,24 @@
-import { User } from "@prisma/client"
+import { Expense, Income, User } from "@prisma/client"
 
-export type ExpenseType = {
-    id: string
-    description: string
-    amount: number
-    createdat: Date
-    userId: string
+export interface DataProps {
+    expenses:
+      | (Expense & {
+          user: User
+        })[]
+      | undefined
+    incomes: | (Income & {
+      user: User
+    })[]
+  | undefined
+}
+
+
+export interface IncomeProps {
+  data:
+  | (Income | Expense & {
     user: User
+  })[]
+  | undefined
+
+  deltaType: 'increase' | 'decrease'
 }

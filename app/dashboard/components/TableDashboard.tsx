@@ -1,28 +1,27 @@
-"use client"
+"use client";
+import { TabList, Grid, Card, Tab, Title } from "@tremor/react";
+import { useState } from "react";
+import ExpIncMonth from "./ExpenseIncomesChartComponents/ExpIncMonth";
+import TableRegisters from "./TableRegisters";
+import { DataProps } from "@/app/types";
+import ExpIncDay from "./ExpenseIncomesChartComponents/ExpIncDay";
+import CreateForm from "@/app/components/CreateForm";
+import Modal from "@/app/components/Modal";
+import { IconSquarePlus } from "@tabler/icons-react";
 
-import { User, Expense } from "@prisma/client"
-import { TabList, Grid, Card, Tab } from "@tremor/react"
-import { useState } from "react"
-import ExpIncMonth from "./ExpenseIncomesChartComponents/ExpIncMonth"
-import TableRegisters from "./Table"
+const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
+  const [selectedView, setSelectedView] = useState("1");
 
-interface TableProps {
-    expenses: (Expense & {
-        user: User;
-    })[] | undefined
-    incomes: (Expense & {
-      user: User;
-  })[] | undefined
-}
+  const [isExpenseModalOpen, setExpenseModalOpen] = useState(false);
+  const [isIncomeModalOpen, setIncomeModalOpen] = useState(false);
 
-const TableDashboard: React.FC<TableProps> = ({ expenses, incomes }) => {
-  const [selectedView, setSelectedView] = useState("1")
+  const toggleExpenseModal = () => {
+    setExpenseModalOpen(!isExpenseModalOpen);
+  };
 
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleModal = () => {
-    setIsOpen(!isOpen)
-  }
+  const toggleIncomeModal = () => {
+    setIncomeModalOpen(!isIncomeModalOpen);
+  };
 
   return (
     <>
@@ -40,11 +39,13 @@ const TableDashboard: React.FC<TableProps> = ({ expenses, incomes }) => {
           <Grid numColsLg={3} className="mt-6 gap-6">
             <Card>
               <div className="h-auto">
-                <ExpIncMonth expenses={expenses}/>
+                <ExpIncMonth expenses={expenses} incomes={incomes} />
               </div>
             </Card>
             <Card>
-              <div className="h-28" />
+              <div className="h-auto">
+                <ExpIncDay expenses={expenses} incomes={incomes} />
+              </div>
             </Card>
             <Card>
               <div className="h-28" />
@@ -59,34 +60,48 @@ const TableDashboard: React.FC<TableProps> = ({ expenses, incomes }) => {
         </>
       ) : (
         <Card className="mt-6">
-          <div className="h-96">
+          <div className="h-auto">
             <Grid numColsLg={2} numColsMd={2} className="mt-6 gap-6">
               <Card>
-                  <TableRegisters
-                      toggleModal={toggleModal} 
-                      isOpen={isOpen} 
-                      data={expenses}
-                      formType="expense"
-                      title="GASTOS"
-                      deltaType="decrease"
+                <Title className="flex justify-between">
+                  GASTOS
+                  <IconSquarePlus
+                    className="cursor-pointer p-1 rounded hover:bg-slate-50"
+                    onClick={toggleExpenseModal}
+                    size={32}
                   />
+                  <Modal toggleModal={toggleExpenseModal} isOpen={isExpenseModalOpen}>
+                    <CreateForm toggleModal={toggleExpenseModal} formType={'expense'} />
+                  </Modal>
+                </Title>
+                <TableRegisters
+                  data={expenses}
+                  deltaType="decrease"
+                />
               </Card>
               <Card>
-                <TableRegisters
-                      toggleModal={toggleModal} 
-                      isOpen={isOpen} 
-                      data={incomes}
-                      formType="income"
-                      title="INGRESOS"
-                      deltaType="increase"
+                <Title className="flex justify-between">
+                  INGRESOS
+                  <IconSquarePlus
+                    className="cursor-pointer p-1 rounded hover:bg-slate-50"
+                    onClick={toggleIncomeModal}
+                    size={32}
                   />
+                  <Modal toggleModal={toggleIncomeModal} isOpen={isIncomeModalOpen}>
+                    <CreateForm toggleModal={toggleIncomeModal} formType={'income'} />
+                  </Modal>
+                </Title>
+                <TableRegisters
+                  data={incomes}
+                  deltaType="increase"
+                />
               </Card>
             </Grid>
           </div>
         </Card>
       )}
     </>
-  )
-}
+  );
+};
 
-export default TableDashboard
+export default TableDashboard;
