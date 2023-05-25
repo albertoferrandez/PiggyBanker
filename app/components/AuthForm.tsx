@@ -68,6 +68,7 @@ const AuthForm = () => {
         if(callback?.ok && !callback?.error){
           toast.success('Sesion Iniciada!')
           router.push('/dashboard')
+          router.refresh()
         }
       })
       .finally(() => setIsLoading(false))

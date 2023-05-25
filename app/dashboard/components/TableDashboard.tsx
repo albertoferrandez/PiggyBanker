@@ -1,27 +1,29 @@
-"use client";
-import { TabList, Grid, Card, Tab, Title } from "@tremor/react";
-import { useState } from "react";
-import ExpIncMonth from "./ExpenseIncomesChartComponents/ExpIncMonth";
-import TableRegisters from "./TableRegisters";
-import { DataProps } from "@/app/types";
-import ExpIncDay from "./ExpenseIncomesChartComponents/ExpIncDay";
-import CreateForm from "@/app/components/CreateForm";
-import Modal from "@/app/components/Modal";
-import { IconSquarePlus } from "@tabler/icons-react";
+"use client"
+
+import { TabList, Grid, Card, Tab, Title } from "@tremor/react"
+import { useState } from "react"
+import ExpIncMonth from "./chart/ExpIncMonth"
+import TableRegisters from "./TableRegisters"
+import { DataProps } from "@/app/types"
+import ExpIncDay from "./chart/ExpIncDay"
+import CreateForm from "@/app/components/CreateForm"
+import Modal from "@/app/components/Modal"
+import { IconSquarePlus } from "@tabler/icons-react"
+import Total from "./chart/Total"
 
 const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
-  const [selectedView, setSelectedView] = useState("1");
+  const [selectedView, setSelectedView] = useState("1")
 
-  const [isExpenseModalOpen, setExpenseModalOpen] = useState(false);
-  const [isIncomeModalOpen, setIncomeModalOpen] = useState(false);
+  const [isExpenseModalOpen, setExpenseModalOpen] = useState(false)
+  const [isIncomeModalOpen, setIncomeModalOpen] = useState(false)
 
   const toggleExpenseModal = () => {
-    setExpenseModalOpen(!isExpenseModalOpen);
-  };
+    setExpenseModalOpen(!isExpenseModalOpen)
+  }
 
   const toggleIncomeModal = () => {
-    setIncomeModalOpen(!isIncomeModalOpen);
-  };
+    setIncomeModalOpen(!isIncomeModalOpen)
+  }
 
   return (
     <>
@@ -48,7 +50,9 @@ const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
               </div>
             </Card>
             <Card>
-              <div className="h-28" />
+              <div className="h-auto">
+                <Total expenses={expenses} incomes={incomes}/>
+              </div>
             </Card>
           </Grid>
 
@@ -101,7 +105,7 @@ const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
         </Card>
       )}
     </>
-  );
-};
+  )
+}
 
-export default TableDashboard;
+export default TableDashboard

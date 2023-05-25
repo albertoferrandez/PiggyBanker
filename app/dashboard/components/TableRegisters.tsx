@@ -24,9 +24,7 @@ const TableRegisters: React.FC<IncomeProps> = ({
                 <Text>{data.createdAt.toDateString()}</Text>
               </TableCell>
               <TableCell>
-                <Text>
                   <BadgeDelta deltaType={deltaType}>{data.amount} €</BadgeDelta>
-                </Text>
               </TableCell>
             </TableRow>
           ))}

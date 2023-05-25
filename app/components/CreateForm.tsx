@@ -12,13 +12,11 @@ interface CreateFormProp {
 }
 const CreateForm = ({ toggleModal, formType }: CreateFormProp) => {
 
-  console.log(formType)
-  const { register, handleSubmit, formState: { errors },
-  } = useForm<FieldValues>({
+  const { register, handleSubmit} = useForm<FieldValues>({
     defaultValues: {
       description: '',
       amount: 0
-    },
+    }
   })
 
   const router = useRouter()
