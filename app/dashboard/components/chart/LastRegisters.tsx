@@ -1,11 +1,15 @@
 import { DataProps } from "@/app/types"
+import { Expense, Income } from "@prisma/client"
 import { Text, Table, TableHead, TableRow, 
     TableHeaderCell, TableBody, 
     TableCell, BadgeDelta } from "@tremor/react"
 
 const LastRegisters: React.FC<DataProps> = ({ expenses, incomes }) => {
   
-  const transactions = [...expenses, ...incomes]
+  const expenseList: Expense[] = expenses || []
+  const incomeList: Income[] = incomes || []
+
+  const transactions = [...expenseList, ...incomeList]
 
   return (
     <Table>
