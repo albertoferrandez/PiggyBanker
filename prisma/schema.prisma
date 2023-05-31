@@ -35,8 +35,6 @@ model Expense {
   @@index([authorId])
 }
 
-
-
 model Income {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   description String
