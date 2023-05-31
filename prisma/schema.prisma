@@ -30,7 +30,7 @@ model Expense {
   createdAt   DateTime @default(now())
   author      User       @relation(fields: [authorId], references: [id])
   authorId    String     @db.ObjectId
-  userId      String     @db.ObjectId // Add this line to define the userId field
+  userId      String     @db.ObjectId 
 
   @@index([authorId])
 }
@@ -44,6 +44,9 @@ model Income {
   createdAt   DateTime @default(now())
   author        User     @relation(fields: [authorId], references: [id])
   authorId      String @db.ObjectId
+  userId      String     @db.ObjectId
+
+  @@index([authorId])
 }
 
 model Account {
