@@ -10,6 +10,7 @@ import CreateForm from "@/app/components/CreateForm"
 import Modal from "@/app/components/Modal"
 import { IconSquarePlus } from "@tabler/icons-react"
 import Total from "./chart/Total"
+import LastRegisters from "./chart/LastRegisters"
 
 const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
   const [selectedView, setSelectedView] = useState("1")
@@ -58,7 +59,7 @@ const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
 
           <div className="mt-6">
             <Card>
-              <div className="h-80" />
+              <LastRegisters expenses={expenses} incomes={incomes} />
             </Card>
           </div>
         </>

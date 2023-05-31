@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import NavBar from "@/app/components/NavBar";
-import hero from "../public/hero.json";
-import Lottie from "lottie-react";
+import NavBar from "@/app/components/NavBar"
+import hero from "../public/hero.json"
+import Lottie from "lottie-react"
 
 export default function Home() {
   return (
@@ -28,5 +28,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  );
+  )
 }
