@@ -21,17 +21,13 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 })
     }
 
-const expend = await prisma.expense.create({
-  data: {
-    description,
-    amount: amountNumber,
-    user: {
-      connect: {
-        id: currentUser.id
-      },
+  const expend = await prisma.expense.create({
+    data: {
+      description,
+      amount: amountNumber,
+      userId: currentUser.id
     },
-  },
-})
+  })
 
     return NextResponse.json(expend)
   } catch (error: any) {

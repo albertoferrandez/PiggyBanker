@@ -25,11 +25,7 @@ export async function POST(request: Request) {
       data: {
         description,
         amount: amountNumber,
-        user: {
-          connect: {
-            id: currentUser.id,
-          },
-        },
+        userId: currentUser.id
       },
     });
 
