@@ -3,19 +3,23 @@ import getCurrentUser from "./getCurrentSesion"
 
 export async function getExpenses() {
     try {
-        const currentUser = await getCurrentUser()
-
-        if (!currentUser) {
-            throw new Error("User not authenticated")
-        }
-
-        const expenses = await prisma.expense.findMany({
-            where: { userId: currentUser?.id},
-            include: { user: true}
-        })
-
-        return expenses
+      const currentUser = await getCurrentUser();
+  
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+  
+      const expenses = await prisma.expense.findMany({
+        where: {
+          userId: {
+            equals: currentUser.id
+          }
+        },
+        include: { user: true }
+      });
+  
+      return expenses;
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-}
+  }

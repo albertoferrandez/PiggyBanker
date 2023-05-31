@@ -1,7 +1,7 @@
 'use client'
 
 import { IconPigMoney } from "@tabler/icons-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "./Modal"
 import AuthForm from "./AuthForm"
 import { useSession } from 'next-auth/react' 
@@ -17,9 +17,12 @@ const NavBar = () => {
         setIsOpen(!isOpen)
     }
 
-    if(session) {
-        router.push('/dashboard')
-    }
+    useEffect(() => {
+        if (session.data) {
+          router.push('/dashboard');
+        }
+      }, [session.data, router]);
+    
     
     return (
         <header>
