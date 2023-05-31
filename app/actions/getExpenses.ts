@@ -12,8 +12,7 @@ export async function getExpenses() {
       const expenses = await prisma.expense.findMany({
         where: {
           userId: currentUser.id
-        },
-        include: { user: true }
+        }
       });
   
       return expenses;
