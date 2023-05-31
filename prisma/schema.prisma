@@ -18,7 +18,7 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   
-  expenses    Expense[] 
+  expenses    Expense[]
   incomes     Income[]
   accounts Account[]
 }
@@ -28,23 +28,18 @@ model Expense {
   description String
   amount      Float
   createdAt   DateTime @default(now())
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    String     @db.ObjectId
-  userId      String     @db.ObjectId 
-
-  @@index([authorId])
+  userId      String     @db.ObjectId
+  user        User       @relation(fields: [userId], references: [id])
 }
+
 
 model Income {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   description String
   amount      Float
   createdAt   DateTime @default(now())
-  author        User     @relation(fields: [authorId], references: [id])
-  authorId      String @db.ObjectId
   userId      String     @db.ObjectId
-
-  @@index([authorId])
+  user        User       @relation(fields: [userId], references: [id])
 }
 
 model Account {
