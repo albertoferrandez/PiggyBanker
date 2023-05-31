@@ -8,7 +8,6 @@ const LastRegisters: React.FC<DataProps> = ({ expenses, incomes }) => {
   
   const expenseList: Expense[] = expenses || []
   const incomeList: Income[] = incomes || []
-
   const transactions = [...expenseList, ...incomeList]
 
   return (
