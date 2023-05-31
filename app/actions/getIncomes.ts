@@ -10,8 +10,7 @@ export async function getIncomes() {
         }
 
         const expenses = await prisma.income.findMany({
-            where: { userId: currentUser?.id},
-            include: { user: true}
+            where: { userId: currentUser?.id}
         })
 
         return expenses
