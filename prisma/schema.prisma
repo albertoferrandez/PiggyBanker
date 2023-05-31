@@ -28,9 +28,13 @@ model Expense {
   description String
   amount      Float
   createdAt   DateTime @default(now())
-  author        User     @relation(fields: [authorId], references: [id])
-  authorId      String @db.ObjectId
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String     @db.ObjectId
+  userId      String     @db.ObjectId // Add this line to define the userId field
+
+  @@index([authorId])
 }
+
 
 
 model Income {
