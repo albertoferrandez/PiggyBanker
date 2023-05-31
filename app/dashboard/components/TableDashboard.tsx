@@ -4,13 +4,13 @@ import { TabList, Grid, Card, Tab, Title } from "@tremor/react"
 import { useState } from "react"
 import ExpIncMonth from "./chart/ExpIncMonth"
 import TableRegisters from "./TableRegisters"
-import { DataProps } from "@/app/types"
 import ExpIncDay from "./chart/ExpIncDay"
 import CreateForm from "@/app/components/CreateForm"
 import Modal from "@/app/components/Modal"
 import { IconSquarePlus } from "@tabler/icons-react"
 import Total from "./chart/Total"
 import LastRegisters from "./chart/LastRegisters"
+import { DataProps } from "@/app/types";
 
 const TableDashboard: React.FC<DataProps> = ({ expenses, incomes }) => {
   const [selectedView, setSelectedView] = useState("1")
